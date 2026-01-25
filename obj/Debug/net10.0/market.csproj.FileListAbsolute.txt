@@ -90,8 +90,6 @@ C:\Users\javie\Desktop\market.v2\obj\Debug\net10.0\compressed\1s6gqqedj3-{0}-jjs
 C:\Users\javie\Desktop\market.v2\obj\Debug\net10.0\compressed\l9hm1usc9s-{0}-9vr69e8ynj-9vr69e8ynj.gz
 C:\Users\javie\Desktop\market.v2\obj\Debug\net10.0\compressed\ivnjnajggk-{0}-87fc7y1x7t-87fc7y1x7t.gz
 C:\Users\javie\Desktop\market.v2\obj\Debug\net10.0\compressed\bvjyvg9knh-{0}-mlv21k5csn-mlv21k5csn.gz
-C:\Users\javie\Desktop\market.v2\obj\Debug\net10.0\compressed\ep26ayafmr-{0}-nxmblokseh-nxmblokseh.gz
-C:\Users\javie\Desktop\market.v2\obj\Debug\net10.0\compressed\dqhqnsnyhr-{0}-nxmblokseh-nxmblokseh.gz
 C:\Users\javie\Desktop\market.v2\obj\Debug\net10.0\staticwebassets.build.json
 C:\Users\javie\Desktop\market.v2\obj\Debug\net10.0\staticwebassets.build.json.cache
 C:\Users\javie\Desktop\market.v2\obj\Debug\net10.0\staticwebassets.development.json
@@ -103,3 +101,5 @@ C:\Users\javie\Desktop\market.v2\obj\Debug\net10.0\refint\market.dll
 C:\Users\javie\Desktop\market.v2\obj\Debug\net10.0\market.pdb
 C:\Users\javie\Desktop\market.v2\obj\Debug\net10.0\market.genruntimeconfig.cache
 C:\Users\javie\Desktop\market.v2\obj\Debug\net10.0\ref\market.dll
+C:\Users\javie\Desktop\market.v2\obj\Debug\net10.0\compressed\ep26ayafmr-{0}-w2gibbp85f-w2gibbp85f.gz
+C:\Users\javie\Desktop\market.v2\obj\Debug\net10.0\compressed\dqhqnsnyhr-{0}-w2gibbp85f-w2gibbp85f.gz
