@@ -2,80 +2,333 @@
     ViewData["Title"] = "Market v2.0";
 }
 
-<div class="container mt-4">
+<style>
+    .hero-section {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 80px 0;
+        margin-bottom: 60px;
+        border-radius: 0 0 50% 50% / 0 0 20px 20px;
+    }
+    
+    .feature-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: none;
+        border-radius: 15px;
+        padding: 30px;
+        height: 100%;
+        background: white;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+    
+    .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+    
+    .product-card {
+        border-radius: 15px;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    
+    .product-card:hover {
+        transform: scale(1.05);
+    }
+    
+    .stats-section {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        color: white;
+        padding: 60px 0;
+        margin: 60px 0;
+    }
+    
+    .stat-number {
+        font-size: 3rem;
+        font-weight: bold;
+        animation: countUp 2s ease-out;
+    }
+    
+    @@keyframes countUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .floating {
+        animation: floating 3s ease-in-out infinite;
+    }
+    
+    @@keyframes floating {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-20px); }
+    }
+    
+    .testimonial-card {
+        background: #f8f9fa;
+        border-radius: 15px;
+        padding: 25px;
+        margin: 15px 0;
+    }
+    
+    .category-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 15px;
+        transition: transform 0.3s ease;
+    }
+    
+    .category-icon:hover {
+        transform: rotate(360deg);
+    }
+</style>
 
-    <!-- HERO -->
-    <section class="text-center mb-5">
-        <h1 class="fw-bold">Market v2.0</h1>
-        <p class="text-muted">
-            Sistema de ventas en línea para compras rápidas, seguras y eficientes en Quilmaná.
-        </p>
+<div>
+    <!-- HERO MEJORADO -->
+    <section class="hero-section text-center">
+        <div class="container">
+            <h1 class="display-3 fw-bold mb-3 floating">Market v2.0</h1>
+            <p class="lead mb-4">
+                Tu minimarket digital en Quilmaná - Compras inteligentes al alcance de tu mano
+            </p>
+            <p class="mb-4">
+                Descubre una nueva forma de comprar: rápida, segura y conveniente. 
+                Productos frescos, ofertas exclusivas y entrega a domicilio.
+            </p>
+            <button class="btn btn-light btn-lg px-5 py-3 rounded-pill shadow">
+                <i class="bi bi-cart-plus me-2"></i>Comenzar a Comprar
+            </button>
+        </div>
     </section>
 
-    <!-- IMÁGENES PEQUEÑAS -->
-    <section class="row mb-5">
-        <div class="col-md-6 mb-3">
-            <img src="https://img.freepik.com/foto-gratis/vista-cerca-carro-compra-sobrecargado-comida-mientras-que-fondo-persona-femenina-elige-productos_342744-1133.jpg?t=st=1769233136~exp=1769236736~hmac=97f48b8071df6289366b534f92c902580a4c47f0508478057e476172c26efe94"
-                 class="img-fluid rounded shadow-sm"
-                 alt="Compras en línea">
-        </div>
-        <div class="col-md-6 mb-3">
-            <img src="https://img.freepik.com/foto-gratis/mujer-telefono-inteligente-supermercado-pie-junto-estantes-llenos-fruta-tienda-sosteniendo-pulgares-arriba_342744-1091.jpg?t=st=1769233191~exp=1769236791~hmac=5062b412183fb05a12f4bd51eabd2e28bc0849f5d2718ad6a813e8a8e95c0c73"
-                 class="img-fluid rounded shadow-sm"
-                 alt="Cliente satisfecho">
-        </div>
-    </section>
+    <div class="container">
+        <!-- CATEGORÍAS PRINCIPALES -->
+        <section class="mb-5">
+            <h2 class="text-center mb-5 fw-bold">Categorías Destacadas</h2>
+            <div class="row text-center g-4">
+                <div class="col-md-3 col-6">
+                    <div class="category-icon">
+                        <i class="bi bi-basket3 fs-1 text-white"></i>
+                    </div>
+                    <h5>Abarrotes</h5>
+                    <p class="text-muted small">+500 productos</p>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="category-icon">
+                        <i class="bi bi-cup-straw fs-1 text-white"></i>
+                    </div>
+                    <h5>Bebidas</h5>
+                    <p class="text-muted small">+200 opciones</p>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="category-icon">
+                        <i class="bi bi-egg-fried fs-1 text-white"></i>
+                    </div>
+                    <h5>Frescos</h5>
+                    <p class="text-muted small">Calidad garantizada</p>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="category-icon">
+                        <i class="bi bi-droplet fs-1 text-white"></i>
+                    </div>
+                    <h5>Limpieza</h5>
+                    <p class="text-muted small">Mejores marcas</p>
+                </div>
+            </div>
+        </section>
 
-    <!-- FUNCIONALIDADES -->
-    <section class="row text-center mb-5">
-        <div class="col-md-4">
-            <i class="bi bi-box-seam fs-1 text-primary"></i>
-            <h4 class="mt-2">Gestión de Productos</h4>
-            <p>Registro, edición y control de stock en tiempo real.</p>
-        </div>
-        <div class="col-md-4">
-            <i class="bi bi-cart-check fs-1 text-success"></i>
-            <h4 class="mt-2">Ventas en Línea</h4>
-            <p>Carrito de compras, pedidos y seguimiento del estado.</p>
-        </div>
-        <div class="col-md-4">
-            <i class="bi bi-shield-lock fs-1 text-danger"></i>
-            <h4 class="mt-2">Seguridad</h4>
-            <p>Protección de datos y transacciones seguras.</p>
-        </div>
-    </section>
+        <!-- PRODUCTOS DESTACADOS -->
+        <section class="mb-5">
+            <h2 class="text-center mb-5 fw-bold">Productos Más Vendidos</h2>
+            <div class="row g-4">
+                <div class="col-md-3 col-6">
+                    <div class="product-card">
+                        <div class="bg-light p-4 text-center">
+                            <i class="bi bi-box-seam fs-1 text-primary"></i>
+                        </div>
+                        <div class="p-3">
+                            <h6 class="fw-bold">Arroz Costeño 1kg</h6>
+                            <p class="text-muted small mb-2">Calidad premium</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="fw-bold text-success">S/ 4.50</span>
+                                <span class="badge bg-warning">Oferta</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="product-card">
+                        <div class="bg-light p-4 text-center">
+                            <i class="bi bi-cup-hot fs-1 text-danger"></i>
+                        </div>
+                        <div class="p-3">
+                            <h6 class="fw-bold">Café Altomayo 200g</h6>
+                            <p class="text-muted small mb-2">100% peruano</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="fw-bold text-success">S/ 12.90</span>
+                                <span class="badge bg-primary">Nuevo</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="product-card">
+                        <div class="bg-light p-4 text-center">
+                            <i class="bi bi-moisture fs-1 text-info"></i>
+                        </div>
+                        <div class="p-3">
+                            <h6 class="fw-bold">Aceite Primor 1L</h6>
+                            <p class="text-muted small mb-2">Extra saludable</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="fw-bold text-success">S/ 8.90</span>
+                                <span class="badge bg-success">Stock</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="product-card">
+                        <div class="bg-light p-4 text-center">
+                            <i class="bi bi-droplet-half fs-1 text-primary"></i>
+                        </div>
+                        <div class="p-3">
+                            <h6 class="fw-bold">Leche Gloria 1L</h6>
+                            <p class="text-muted small mb-2">Entera fortificada</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="fw-bold text-success">S/ 5.20</span>
+                                <span class="badge bg-success">Stock</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <!-- SECCIÓN OBJETIVO -->
-    <section class="mb-5">
-        <h2 class="text-center mb-3">Objetivo del Sistema</h2>
-        <p class="text-center text-muted">
-            Modernizar la gestión del minimarket mediante la automatización de ventas,
-            inventario y atención al cliente, mejorando la eficiencia operativa y la experiencia del usuario.
-        </p>
-    </section>
+        <!-- FUNCIONALIDADES -->
+        <section class="row g-4 mb-5">
+            <div class="col-md-4">
+                <div class="feature-card text-center">
+                    <i class="bi bi-box-seam fs-1 text-primary mb-3"></i>
+                    <h4 class="mb-3">Gestión Inteligente</h4>
+                    <p class="text-muted">Control total del inventario con alertas automáticas de stock bajo y reportes en tiempo real.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card text-center">
+                    <i class="bi bi-cart-check fs-1 text-success mb-3"></i>
+                    <h4 class="mb-3">Compra Fácil</h4>
+                    <p class="text-muted">Carrito intuitivo, múltiples métodos de pago y seguimiento de pedidos desde tu celular.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card text-center">
+                    <i class="bi bi-truck fs-1 text-warning mb-3"></i>
+                    <h4 class="mb-3">Entrega Rápida</h4>
+                    <p class="text-muted">Recibe tus productos en la puerta de tu casa en menos de 24 horas en Quilmaná.</p>
+                </div>
+            </div>
+        </section>
 
-    <!-- SECCIÓN BENEFICIOS -->
-    <section class="row text-center mb-5">
-        <div class="col-md-3">
-            <i class="bi bi-speedometer2 fs-2"></i>
-            <h5 class="mt-2">Rapidez</h5>
-            <p>Procesos optimizados y respuestas rápidas.</p>
-        </div>
-        <div class="col-md-3">
-            <i class="bi bi-graph-up fs-2"></i>
-            <h5 class="mt-2">Crecimiento</h5>
-            <p>Aumento de ingresos y control de ventas.</p>
-        </div>
-        <div class="col-md-3">
-            <i class="bi bi-people fs-2"></i>
-            <h5 class="mt-2">Clientes</h5>
-            <p>Mejor experiencia y fidelización.</p>
-        </div>
-        <div class="col-md-3">
-            <i class="bi bi-phone fs-2"></i>
-            <h5 class="mt-2">Accesibilidad</h5>
-            <p>Compra desde cualquier dispositivo.</p>
-        </div>
-    </section>
+        <!-- ESTADÍSTICAS -->
+        <section class="stats-section rounded-4 text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-6 mb-4">
+                        <div class="stat-number">1,500+</div>
+                        <p class="mb-0">Productos</p>
+                    </div>
+                    <div class="col-md-3 col-6 mb-4">
+                        <div class="stat-number">800+</div>
+                        <p class="mb-0">Clientes Activos</p>
+                    </div>
+                    <div class="col-md-3 col-6 mb-4">
+                        <div class="stat-number">98%</div>
+                        <p class="mb-0">Satisfacción</p>
+                    </div>
+                    <div class="col-md-3 col-6 mb-4">
+                        <div class="stat-number">24/7</div>
+                        <p class="mb-0">Disponible</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <!-- TESTIMONIOS -->
+        <section class="mb-5">
+            <h2 class="text-center mb-5 fw-bold">Lo Que Dicen Nuestros Clientes</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="mb-3">
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                        </div>
+                        <p>"Excelente servicio, los productos llegan frescos y a tiempo. Lo recomiendo 100%"</p>
+                        <p class="mb-0 fw-bold">- María González</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="mb-3">
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                        </div>
+                        <p>"La app es muy fácil de usar y los precios son justos. Ya no tengo que salir de casa"</p>
+                        <p class="mb-0 fw-bold">- Carlos Pérez</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="mb-3">
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-half text-warning"></i>
+                        </div>
+                        <p>"Gran variedad de productos y atención al cliente impecable. Mi tienda favorita"</p>
+                        <p class="mb-0 fw-bold">- Ana Rodríguez</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BENEFICIOS -->
+        <section class="mb-5">
+            <h2 class="text-center mb-5 fw-bold">¿Por Qué Elegirnos?</h2>
+            <div class="row text-center g-4">
+                <div class="col-md-3 col-6">
+                    <i class="bi bi-speedometer2 fs-1 text-primary mb-3"></i>
+                    <h5 class="fw-bold">Rapidez</h5>
+                    <p class="text-muted">Procesos optimizados para tu comodidad</p>
+                </div>
+                <div class="col-md-3 col-6">
+                    <i class="bi bi-shield-check fs-1 text-success mb-3"></i>
+                    <h5 class="fw-bold">Seguridad</h5>
+                    <p class="text-muted">Transacciones 100% protegidas</p>
+                </div>
+                <div class="col-md-3 col-6">
+                    <i class="bi bi-tags fs-1 text-danger mb-3"></i>
+                    <h5 class="fw-bold">Ofertas</h5>
+                    <p class="text-muted">Promociones exclusivas semanales</p>
+                </div>
+                <div class="col-md-3 col-6">
+                    <i class="bi bi-headset fs-1 text-info mb-3"></i>
+                    <h5 class="fw-bold">Soporte</h5>
+                    <p class="text-muted">Atención personalizada siempre</p>
+                </div>
+            </div>
+        </section>
+    </div>
 </div>

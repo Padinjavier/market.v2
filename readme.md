@@ -1,4 +1,3 @@
-
 # Market V2 🛒
 
 Sistema web desarrollado con **ASP.NET Core** y **MySQL**, orientado a la gestión de usuarios con una arquitectura preparada para escalar.
@@ -60,15 +59,3 @@ La estructura permite extenderse por **distrito, provincia y departamento** sin 
 - ✔ Manejo de sesiones
 - ✔ Diseño inicial de interfaz
 - ⏳ Módulos en expansión
-
----
-
-## 👤 Autor
-
-Javier Padin
-
----
-
-## 📝 Licencia
-
-Uso libre para fines educativos y desarrollo personal.
