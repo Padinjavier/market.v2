@@ -18,12 +18,17 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult Privacy()
+    public IActionResult Nosotros()
+    {
+        return View();
+    }
+    
+    public IActionResult Categorias()
     {
         return View();
     }
 
-    public IActionResult Nosotros()
+    public IActionResult Privacy()
     {
         return View();
     }

@@ -32,24 +32,93 @@ namespace market.Controllers
             }
 
             var hashedPassword = HashPassword(password);
-            Console.WriteLine($"Email: {email}, Hashed Password: {hashedPassword}");
 
-            var persona = await _context.Personas
-                .FirstOrDefaultAsync(p => p.EmailUser == email && p.Password == hashedPassword && p.Status == 1);
+            // 1) Intentar con la nueva tabla `users`
+            var user = await _context.Set<User>()
+                .FirstOrDefaultAsync(u => u.Email == email && u.PasswordHash == hashedPassword && u.Status == 1);
 
-            if (persona == null)
+            Persona personaFallback = null;
+            if (user == null)
             {
-                Console.WriteLine("Usuario no encontrado o contraseña incorrecta.");
-                TempData["Error"] = "Correo o contraseña incorrectos.";
-                return RedirectToAction("Index", "Home");
+                // 2) Fallback a personas (compatibilidad hacia atrás)
+                personaFallback = await _context.Personas
+                    .FirstOrDefaultAsync(p => p.EmailUser == email && p.Password == hashedPassword && p.Status == 1);
+
+                if (personaFallback == null)
+                {
+                    TempData["Error"] = "Correo o contraseña incorrectos.";
+                    return RedirectToAction("Index", "Home");
+                }
             }
 
-            // Guardar en sesión
-            HttpContext.Session.SetString("UserId", persona.Idpersona.ToString());
-            HttpContext.Session.SetString("UserName", persona.Nombres.Split(' ')[0]); // Primer nombre
-            HttpContext.Session.SetString("UserRole", persona.Rolid.ToString());
+            // Normalizar datos de usuario (soporta ambos esquemas)
+            var sessionUserId = user != null ? user.UserId.ToString() : personaFallback!.Idpersona.ToString();
+            var identification = user?.Identification ?? personaFallback?.Identificacion ?? string.Empty;
 
-            Console.WriteLine($"Login exitoso para {persona.Nombres}");
+            // nombres/apellidos: separar por espacios para extraer primer y segundo nombre si no hay campos separados
+            string firstName = string.Empty, middleName = string.Empty, lastName = string.Empty, secondLastName = string.Empty;
+            if (user != null)
+            {
+                firstName = user.FirstName ?? string.Empty;
+                middleName = user.MiddleName ?? string.Empty;
+                lastName = user.LastName ?? string.Empty;
+                secondLastName = user.SecondLastName ?? string.Empty;
+            }
+            else
+            {
+                var nombres = (personaFallback!.Nombres ?? string.Empty).Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                firstName = nombres.Length > 0 ? nombres[0] : string.Empty;
+                middleName = nombres.Length > 1 ? nombres[1] : string.Empty;
+
+                var apellidos = (personaFallback.Apellidos ?? string.Empty).Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                lastName = apellidos.Length > 0 ? apellidos[0] : string.Empty;
+                secondLastName = apellidos.Length > 1 ? apellidos[1] : string.Empty;
+            }
+
+            var phone = user != null ? user.Phone : personaFallback!.Telefono.ToString();
+            var emailStored = user != null ? user.Email : personaFallback!.EmailUser;
+            var roleId = user != null ? user.RoleId.ToString() : personaFallback!.Rolid.ToString();
+
+            // Guardar en sesión (campos solicitados)
+            HttpContext.Session.SetString("UserId", sessionUserId);
+            HttpContext.Session.SetString("Identification", identification ?? string.Empty);
+            HttpContext.Session.SetString("FirstName", firstName ?? string.Empty);
+            HttpContext.Session.SetString("MiddleName", middleName ?? string.Empty);
+            HttpContext.Session.SetString("LastName", lastName ?? string.Empty);
+            HttpContext.Session.SetString("SecondLastName", secondLastName ?? string.Empty);
+            HttpContext.Session.SetString("Phone", phone ?? string.Empty);
+            HttpContext.Session.SetString("Email", emailStored ?? string.Empty);
+            HttpContext.Session.SetString("RoleId", roleId ?? string.Empty);
+
+            // Compatibilidad con keys usadas antes
+            HttpContext.Session.SetString("UserName", (firstName ?? string.Empty));
+            HttpContext.Session.SetString("UserRole", roleId ?? string.Empty);
+
+            // Construir permisos escalables desde tablas `permissions` + `modules`
+            var perms = await (from p in _context.Permissions
+                               join m in _context.Modules on p.ModuleId equals m.ModuleId
+                               where p.RoleId == (user != null ? user.RoleId : personaFallback!.Rolid)
+                               select new
+                               {
+                                   Module = m.Title,
+                                   p.CanRead,
+                                   p.CanWrite,
+                                   p.CanUpdate,
+                                   p.CanDelete
+                               }).ToListAsync();
+
+            var dict = perms
+                .GroupBy(x => (x.Module ?? string.Empty).ToLowerInvariant())
+                .ToDictionary(g => g.Key, g => new Helpers.PermissionDto
+                {
+                    Read = g.First().CanRead == 1,
+                    Write = g.First().CanWrite == 1,
+                    Update = g.First().CanUpdate == 1,
+                    Delete = g.First().CanDelete == 1
+                });
+
+            // Guardar permisos en sesión (JSON) — usar SessionExtensions
+            HttpContext.Session.SetObject("Permissions", dict);
 
             return RedirectToAction("Index", "Home");
         }
